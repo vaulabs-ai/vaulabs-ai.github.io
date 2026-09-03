@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaulabs.ai — Smart Utility Apps &amp; High-Engagement Games</title>
+<meta name="description" content="Vaulabs.ai builds focused Android utility apps and high-engagement mobile games.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Sora"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  :root{
+    --bg:#0B0F17;
+    --surface:#12141F;
+    --surface-2:#171A26;
+    --text:#ECEFF6;
+    --text-muted:#94A0B8;
+    --cyan:#33E1F2;
+    --violet:#9B7BFF;
+    --emerald:#3EE6A6;
+    color-scheme: dark;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  ::selection{ background:var(--violet); color:#04060A; }
+
+  h1,h2,h3,h4,.display{
+    font-family:'Sora', ui-sans-serif, system-ui, sans-serif;
+    letter-spacing:-0.02em;
+    text-wrap:balance;
+  }
+
+  a{ text-decoration:none; }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--cyan);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  .grad-text{
+    background:linear-gradient(100deg,var(--cyan),var(--violet));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+
+  /* Hero glow */
+  .hero-wrap{ position:relative; overflow:hidden; }
+  .orb{ position:absolute; border-radius:50%; filter:blur(90px); opacity:.5; mix-blend-mode:screen; pointer-events:none; }
+  .orb-cyan{ width:420px; height:420px; background:var(--cyan); top:-140px; left:-80px; }
+  .orb-violet{ width:460px; height:460px; background:var(--violet); top:-60px; right:-160px; }
+
+  /* Buttons */
+  .btn{
+    display:inline-flex; align-items:center; gap:.5rem;
+    font-weight:600; font-size:.92rem;
+    padding:.8rem 1.6rem;
+    border-radius:999px;
+    transition:transform .15s ease, filter .15s ease, background-color .15s ease, border-color .15s ease, color .15s ease;
+    cursor:pointer;
+    border:none;
+  }
+  .btn-primary{
+    background:linear-gradient(110deg,var(--cyan),var(--violet));
+    color:#04060A;
+  }
+  .btn-primary:hover{ filter:brightness(1.08); transform:translateY(-1px); }
+  .btn-ghost{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    color:var(--text);
+    backdrop-filter:blur(6px);
+  }
+  .btn-ghost:hover{ background:rgba(255,255,255,.1); }
+  .btn-disabled{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    color:var(--text-muted);
+    cursor:default;
+  }
+
+  /* Cards */
+  .card{
+    position:relative;
+    background:var(--surface);
+    border-radius:28px;
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.65);
+  }
+  .card-glow::before{
+    content:"";
+    position:absolute; inset:-2px;
+    border-radius:30px;
+    background:linear-gradient(120deg,var(--cyan),var(--violet));
+    opacity:.16;
+    filter:blur(22px);
+    z-index:-1;
+  }
+
+  .badge{
+    display:inline-flex; align-items:center; gap:.4rem;
+    font-size:.72rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+    padding:.35rem .75rem;
+    border-radius:999px;
+    background:rgba(255,255,255,.06);
+  }
+  .dot{ width:6px; height:6px; border-radius:50%; flex:none; }
+
+  .feat li{ display:flex; gap:.6rem; align-items:flex-start; color:var(--text-muted); font-size:.92rem; line-height:1.5; }
+  .feat svg{ flex:none; margin-top:3px; color:var(--cyan); }
+
+  /* Legal tabs */
+  .tabs-pill{
+    display:inline-flex; gap:4px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:999px;
+    padding:4px;
+  }
+  .tab-btn{
+    font-family:'Inter', sans-serif;
+    font-weight:600; font-size:.88rem;
+    padding:.6rem 1.3rem;
+    border-radius:999px;
+    color:var(--text-muted);
+    background:transparent;
+    border:none;
+    cursor:pointer;
+    transition:color .15s ease, background .2s ease;
+  }
+  .tab-btn[aria-selected="true"]{
+    background:linear-gradient(110deg,var(--cyan),var(--violet));
+    color:#04060A;
+  }
+  .tab-panel[hidden]{ display:none; }
+
+  .prose-copy{ max-width:68ch; }
+  .prose-copy p, .prose-copy li{ color:var(--text-muted); line-height:1.75; font-size:.96rem; }
+  .prose-copy p + p, .prose-copy p + ul, .prose-copy ul + p{ margin-top:.9rem; }
+  .prose-copy h4{ font-family:'Sora',sans-serif; font-weight:700; font-size:1.02rem; color:var(--cyan); margin-top:2rem; margin-bottom:.6rem; letter-spacing:-0.01em; }
+  .prose-copy ul{ list-style:none; padding-left:0; }
+  .prose-copy li{ position:relative; padding-left:1.15rem; }
+  .prose-copy li::before{ content:"–"; position:absolute; left:0; color:var(--violet); }
+  .prose-copy strong{ color:var(--text); font-weight:600; }
+  .prose-copy a{ color:var(--cyan); text-decoration:underline; text-decoration-color:rgba(51,225,242,.35); }
+  .prose-copy a:hover{ text-decoration-color:var(--cyan); }
+
+  section[id]{ scroll-margin-top:5.5rem; }
+
+  @media (prefers-reduced-motion: reduce){
+    .btn{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="sticky top-0 z-40 backdrop-blur" style="background:rgba(11,15,23,0.82); border-bottom:1px solid rgba(255,255,255,.08);">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between">
+    <a href="#top" class="display text-lg font-bold">Vaulabs<span style="color:var(--text-muted);">.ai</span></a>
+    <nav class="hidden sm:flex items-center gap-8 text-sm font-medium" style="color:var(--text-muted);">
+      <a href="#apps" class="hover:text-white transition-colors">Apps</a>
+      <a href="#legal" class="hover:text-white transition-colors">Legal</a>
+      <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero-wrap max-w-6xl mx-auto px-6 md:px-10 pt-10 pb-20 md:pt-16 md:pb-28 text-center">
+    <div class="orb orb-cyan"></div>
+    <div class="orb orb-violet"></div>
+    <div class="relative">
+      <p class="text-sm mb-5" style="color:var(--text-muted);">Software studio</p>
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-[1.08] mb-6 max-w-3xl mx-auto">
+        Smart Utility Apps &amp; <span class="grad-text">High-Engagement Games</span>
+      </h1>
+      <p class="max-w-xl mx-auto mb-9" style="color:var(--text-muted); font-size:1.05rem; line-height:1.7;">
+        Vaulabs.ai builds focused Android utilities and mobile games — small tools that
+        solve one problem well, and games built around a daily habit instead of a single
+        session.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="#apps" class="btn btn-primary">Explore the Apps</a>
+        <a href="#legal" class="btn btn-ghost">Legal &amp; Privacy</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="apps" class="max-w-6xl mx-auto px-6 md:px-10 pb-24">
+    <p class="text-sm mb-3" style="color:var(--text-muted);">Portfolio</p>
+    <h2 class="text-2xl md:text-3xl font-bold mb-10">What we've shipped</h2>
+
+    <div class="grid md:grid-cols-2 gap-7">
+      <!-- Card 1: Battery Limit Notifier -->
+      <div class="card card-glow p-8 flex flex-col">
+        <div class="flex items-center justify-between mb-6">
+          <span class="badge"><span class="dot" style="background:var(--emerald);"></span><span style="color:var(--emerald);">Live on Play Store</span></span>
+          <span class="text-xs" style="color:var(--text-muted);">com.batterylimit.notifier</span>
+        </div>
+
+        <div class="mb-4" style="color:var(--cyan);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="17" height="10" rx="2.5"></rect>
+            <path d="M21 10v4"></path>
+            <path d="M7 12l1.8-2.6L11 13l1.6-2.2"></path>
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-bold mb-2">Battery Limit Notifier</h3>
+        <p class="mb-5" style="color:var(--text-muted); font-size:.95rem; line-height:1.65;">
+          A focused Android utility that watches your charge percentage in the background
+          and tells you the moment it's time to unplug — built to slow down battery wear
+          without becoming another app you have to think about.
+        </p>
+
+        <ul class="feat space-y-2.5 mb-7">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Custom charge-limit alerts — get notified at the % you set</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Lightweight background service, minimal battery &amp; data use</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Home-screen widget showing live charge % and status</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>One-time Pro unlock removes ads and adds extra thresholds</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Works fully offline — no account, no setup</li>
+        </ul>
+
+        <a href="https://play.google.com/store/apps/details?id=com.batterylimit.notifier" target="_blank" rel="noopener" class="btn btn-primary mt-auto self-start">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.5.3-1 .8-1.2l10.6 9.7-10.6 9.7c-.5-.2-.8-.7-.8-1.2zM16.8 12l2.7-1.5c.9-.5.9-1.5 0-2l-2.7-1.5-2.9 3 2.9 2zM4.5 3l9.6 8.3 2.5-1.4L4.9 2.7c-.1 0-.3.1-.4.3zM4.9 21.3l11.7-6.6-2.5-1.4L4.5 21c.1.2.3.3.4.3z"/></svg>
+          Get it on Google Play
+        </a>
+      </div>
+
+      <!-- Card 2: Upcoming Pipeline -->
+      <div class="card p-8 flex flex-col" style="opacity:.88;">
+        <div class="flex items-center justify-between mb-6">
+          <span class="badge"><span class="dot" style="background:var(--violet);"></span><span style="color:var(--violet);">Coming Soon</span></span>
+        </div>
+
+        <div class="mb-4" style="color:var(--violet);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3.2"></circle>
+            <path d="M12 3v2.2M12 18.8V21M21 12h-2.2M5.2 12H3M18 6l-1.5 1.5M7.5 16.5L6 18M18 18l-1.5-1.5M7.5 7.5L6 6"></path>
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-bold mb-2">What's Next</h3>
+        <p class="mb-5" style="color:var(--text-muted); font-size:.95rem; line-height:1.65;">
+          New utility apps and mobile games are actively in progress — each one aimed at a
+          specific everyday annoyance or a genuinely replayable core loop. Details land
+          here as they're ready to ship.
+        </p>
+
+        <ul class="feat space-y-2 mb-7">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--violet);"><circle cx="12" cy="12" r="9"></circle></svg>Utility app — in build</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-muted);"><circle cx="12" cy="12" r="9"></circle></svg>Daily mobile game — in design</li>
+        </ul>
+
+        <span class="btn btn-disabled mt-auto self-start">Coming soon</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEGAL -->
+  <section id="legal" class="max-w-6xl mx-auto px-6 md:px-10 pb-24">
+    <p class="text-sm mb-3" style="color:var(--text-muted);">Legal</p>
+    <h2 class="text-2xl md:text-3xl font-bold mb-8">Privacy &amp; Terms</h2>
+
+    <div role="tablist" aria-label="Legal documents" class="tabs-pill mb-8">
+      <button type="button" class="tab-btn" id="tab-privacy" role="tab" aria-selected="true" aria-controls="privacy-policy">Privacy Policy</button>
+      <button type="button" class="tab-btn" id="tab-terms" role="tab" aria-selected="false" aria-controls="terms-of-service">Terms of Service</button>
+    </div>
+
+    <div class="card p-8 md:p-12">
+      <div id="privacy-policy" class="tab-panel prose-copy" role="tabpanel" aria-labelledby="tab-privacy">
+        <p class="text-xs mb-1" style="color:var(--text-muted);">Effective date: <span style="color:var(--text);">January 1, 2026</span></p>
+        <p>
+          This Privacy Policy explains how <strong>Vaulabs.ai</strong> ("we", "us") handles
+          information in connection with our Android applications, including
+          <strong>Battery Limit Notifier</strong> and future Vaulabs.ai apps (together, the
+          "Apps"). By installing or using an App, you agree to the practices described here.
+        </p>
+
+        <h4>Information We Collect</h4>
+        <p>We do not require you to create an account or provide personal details such as your name or email address to use our Apps. We do collect limited technical information automatically:</p>
+        <ul>
+          <li><strong>Device information</strong> — device model, OS version, language, and screen size, used to keep the Apps working correctly across devices.</li>
+          <li><strong>Usage &amp; diagnostic data</strong> — app opens, feature usage, crash reports, and performance data, collected via Firebase Analytics and Firebase Crashlytics.</li>
+          <li><strong>Advertising identifiers</strong> — your device's Advertising ID (or equivalent), collected via Google AdMob for showing and measuring ads.</li>
+        </ul>
+        <p>We never collect precise location, contacts, photos, or any data unrelated to the App's core function.</p>
+
+        <h4>Analytics — Firebase</h4>
+        <p>
+          We use <strong>Firebase Analytics</strong> (a Google service) to understand how the
+          Apps are used in aggregate — for example, which features are opened most often —
+          so we can prioritize fixes and improvements. Firebase Analytics data is processed
+          under Google's own privacy terms.
+        </p>
+
+        <h4>Monetization — AdMob &amp; In-App Purchases</h4>
+        <p>
+          Our free Apps are supported by <strong>Google AdMob</strong> banner ads. AdMob may
+          use your advertising identifier to show ads that are relevant to you and to measure
+          ad performance; you can reset or limit ad personalization from your device's
+          Google Settings at any time. Apps that offer a Pro/paid unlock (for example, to
+          remove ads) process that purchase through <strong>Google Play Billing</strong> —
+          we never see or store your payment card details, which are handled entirely by
+          Google Play.
+        </p>
+
+        <h4>Data Retention</h4>
+        <p>
+          Analytics and diagnostic data is retained by Firebase for up to 14 months from
+          collection, after which it is automatically deleted or anonymized, in line with
+          Firebase's default retention settings. Advertising identifiers are retained by
+          AdMob according to Google's own advertising data policies, not by us directly —
+          we do not maintain a separate database of user data.
+        </p>
+
+        <h4>Children's Privacy</h4>
+        <p>
+          Our Apps are not directed at children under 13, and we do not knowingly collect
+          personal information from children. If you believe a child has provided us with
+          information, contact us at the address below and we will remove it.
+        </p>
+
+        <h4>Your Rights</h4>
+        <p>
+          You can opt out of personalized ads from your device settings, and uninstalling
+          an App stops all further data collection from that device. To request details
+          about data associated with your device, or to ask a question about this policy,
+          email us — see Contact below.
+        </p>
+
+        <h4>Changes to This Policy</h4>
+        <p>
+          We may update this policy as our Apps evolve. Material changes will update the
+          "Effective date" above; continued use of an App after a change means you accept
+          the revised policy.
+        </p>
+
+        <h4>Contact</h4>
+        <p>Questions about this policy: <a href="mailto:vaulabs.ai@gmail.com">vaulabs.ai@gmail.com</a></p>
+      </div>
+
+      <div id="terms-of-service" class="tab-panel prose-copy" role="tabpanel" aria-labelledby="tab-terms" hidden>
+        <p class="text-xs mb-1" style="color:var(--text-muted);">Effective date: <span style="color:var(--text);">January 1, 2026</span></p>
+        <p>
+          These Terms of Service ("Terms") govern your use of applications published by
+          <strong>Vaulabs.ai</strong> ("we", "us"), including <strong>Battery Limit
+          Notifier</strong> and future Vaulabs.ai apps (the "Apps"). By downloading or using
+          an App, you agree to these Terms.
+        </p>
+
+        <h4>License to Use</h4>
+        <p>
+          We grant you a personal, non-exclusive, non-transferable, revocable license to
+          install and use the Apps on devices you own or control, for personal,
+          non-commercial purposes, subject to these Terms and the policies of the app store
+          you downloaded from.
+        </p>
+
+        <h4>In-App Purchases &amp; Billing</h4>
+        <p>
+          Some Apps offer an optional one-time Pro unlock or other paid features, processed
+          through Google Play Billing. All purchases are subject to Google Play's own
+          payment and refund policies; we do not directly process or store payment
+          information.
+        </p>
+
+        <h4>Acceptable Use</h4>
+        <p>You agree not to:</p>
+        <ul>
+          <li>Reverse-engineer, decompile, or tamper with an App beyond what's permitted by law.</li>
+          <li>Use an App to violate any applicable law or third-party right.</li>
+          <li>Interfere with an App's normal operation, including its ad delivery or billing systems.</li>
+        </ul>
+
+        <h4>Disclaimer of Warranty</h4>
+        <p>
+          The Apps are provided "as is" and "as available," without warranties of any kind,
+          express or implied. We do not guarantee the Apps will be uninterrupted, error-free,
+          or fit for any particular purpose.
+        </p>
+
+        <h4>Limitation of Liability</h4>
+        <p>
+          To the maximum extent permitted by law, Vaulabs.ai will not be liable for any
+          indirect, incidental, or consequential damages arising from your use of, or
+          inability to use, an App.
+        </p>
+
+        <h4>Governing Law</h4>
+        <p>
+          These Terms are governed by the laws of India, without regard to conflict-of-law
+          principles. Any dispute arising from these Terms will be subject to the exclusive
+          jurisdiction of the courts of India.
+        </p>
+
+        <h4>Changes to These Terms</h4>
+        <p>
+          We may revise these Terms from time to time. Continued use of an App after changes
+          take effect constitutes acceptance of the revised Terms.
+        </p>
+
+        <h4>Contact</h4>
+        <p>Questions about these Terms: <a href="mailto:vaulabs.ai@gmail.com">vaulabs.ai@gmail.com</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact" style="border-top:1px solid rgba(255,255,255,.08);">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style="color:var(--text-muted);">
+    <span class="display font-bold" style="color:var(--text);">Vaulabs.ai</span>
+    <a href="mailto:vaulabs.ai@gmail.com" class="hover:text-white transition-colors">vaulabs.ai@gmail.com</a>
+    <span>© 2026 Vaulabs.ai. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var tabs = {
+      'privacy-policy': { btn: document.getElementById('tab-privacy'), panel: document.getElementById('privacy-policy') },
+      'terms-of-service': { btn: document.getElementById('tab-terms'), panel: document.getElementById('terms-of-service') }
+    };
+
+    function activate(id, scroll){
+      Object.keys(tabs).forEach(function(key){
+        var isActive = key === id;
+        tabs[key].btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        tabs[key].panel.hidden = !isActive;
+      });
+      if (scroll) {
+        tabs[id].panel.scrollIntoView({ block: 'start' });
+      }
+    }
+
+    tabs['privacy-policy'].btn.addEventListener('click', function(){
+      activate('privacy-policy', false);
+      history.replaceState(null, '', '#privacy-policy');
+    });
+    tabs['terms-of-service'].btn.addEventListener('click', function(){
+      activate('terms-of-service', false);
+      history.replaceState(null, '', '#terms-of-service');
+    });
+
+    function syncFromHash(){
+      var hash = location.hash.replace('#', '');
+      if (tabs[hash]) activate(hash, true);
+    }
+    window.addEventListener('hashchange', syncFromHash);
+    syncFromHash();
+  })();
+</script>
+
+</body>
+</html>
