@@ -295,49 +295,87 @@
 
     <div class="card p-8 md:p-12">
       <div id="privacy-policy" class="tab-panel prose-copy" role="tabpanel" aria-labelledby="tab-privacy">
-        <p class="text-xs mb-1" style="color:var(--text-muted);">Effective date: <span style="color:var(--text);">January 1, 2026</span></p>
+        <p class="text-xs mb-1" style="color:var(--text-muted);">Effective date: <span style="color:var(--text);">October 28, 2026</span></p>
         <p>
           This Privacy Policy explains how <strong>Vaulabs.ai</strong> ("we", "us") handles
           information in connection with our Android applications, including
-          <strong>Battery Limit Notifier</strong> and future Vaulabs.ai apps (together, the
-          "Apps"). By installing or using an App, you agree to the practices described here.
+          <strong>Battery Limit Notifier</strong>, <strong>Fortune Machine</strong>, and future
+          Vaulabs.ai apps (together, the "Apps"). By installing or using an App, you agree to
+          the practices described here.
         </p>
 
         <h4>Information We Collect</h4>
-        <p>We do not require you to create an account or provide personal details such as your name or email address to use our Apps. We do collect limited technical information automatically:</p>
-        <ul>
-          <li><strong>Device information</strong> — device model, OS version, language, and screen size, used to keep the Apps working correctly across devices.</li>
-          <li><strong>Usage &amp; diagnostic data</strong> — app opens, feature usage, crash reports, and performance data, collected via Firebase Analytics and Firebase Crashlytics.</li>
-          <li><strong>Advertising identifiers</strong> — your device's Advertising ID (or equivalent), collected via Google AdMob for showing and measuring ads.</li>
-        </ul>
-        <p>We never collect precise location, contacts, photos, or any data unrelated to the App's core function.</p>
+        <p>
+          We do not require you to create an account or provide personal details such as your
+          name or email address to use our Apps. Every App collects basic
+          <strong>device information</strong> (device model, OS version, language, and screen
+          size) to keep it working correctly across devices. Beyond that, what's collected
+          varies by App, since different Apps use different SDKs:
+        </p>
+        <div class="overflow-x-auto my-4" style="border:1px solid rgba(255,255,255,.08); border-radius:12px;">
+          <table class="w-full text-sm" style="border-collapse:collapse;">
+            <thead>
+              <tr style="background:var(--surface-2);">
+                <th class="text-left p-3" style="color:var(--text);">App</th>
+                <th class="text-left p-3" style="color:var(--text);">Analytics / crash reports</th>
+                <th class="text-left p-3" style="color:var(--text);">Advertising (AdMob)</th>
+                <th class="text-left p-3" style="color:var(--text);">In-app purchases</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-top:1px solid rgba(255,255,255,.08);">
+                <td class="p-3" style="color:var(--text);"><strong>Battery Limit Notifier</strong></td>
+                <td class="p-3" style="color:var(--text-muted);">Firebase Analytics &amp; Crashlytics</td>
+                <td class="p-3" style="color:var(--text-muted);">Banner ads</td>
+                <td class="p-3" style="color:var(--text-muted);">Yes — Pro unlock (Google Play Billing)</td>
+              </tr>
+              <tr style="border-top:1px solid rgba(255,255,255,.08);">
+                <td class="p-3" style="color:var(--text);"><strong>Fortune Machine</strong></td>
+                <td class="p-3" style="color:var(--text-muted);">None</td>
+                <td class="p-3" style="color:var(--text-muted);">Banner &amp; interstitial ads</td>
+                <td class="p-3" style="color:var(--text-muted);">None</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="color:var(--text-muted);font-size:.85rem;">
+          This table is updated whenever a new Vaulabs.ai app launches or an existing app's
+          data practices change.
+        </p>
+        <p>
+          <strong>Advertising identifiers</strong> (your device's Advertising ID or
+          equivalent) are collected by <strong>Google AdMob</strong> for any App showing ads,
+          in whatever ad format that App uses. We never collect precise location, contacts,
+          photos, or any data unrelated to an App's core function, in any App.
+        </p>
 
         <h4>Analytics — Firebase</h4>
         <p>
-          We use <strong>Firebase Analytics</strong> (a Google service) to understand how the
-          Apps are used in aggregate — for example, which features are opened most often —
-          so we can prioritize fixes and improvements. Firebase Analytics data is processed
-          under Google's own privacy terms.
+          For Apps that use it (see table above), we use <strong>Firebase Analytics</strong>
+          (a Google service) to understand how the App is used in aggregate — for example,
+          which features are opened most often — so we can prioritize fixes and improvements.
+          Firebase Analytics data is processed under Google's own privacy terms.
         </p>
 
         <h4>Monetization — AdMob &amp; In-App Purchases</h4>
         <p>
-          Our free Apps are supported by <strong>Google AdMob</strong> banner ads. AdMob may
-          use your advertising identifier to show ads that are relevant to you and to measure
-          ad performance; you can reset or limit ad personalization from your device's
-          Google Settings at any time. Apps that offer a Pro/paid unlock (for example, to
-          remove ads) process that purchase through <strong>Google Play Billing</strong> —
-          we never see or store your payment card details, which are handled entirely by
-          Google Play.
+          Our free Apps are supported by <strong>Google AdMob</strong> ads, in the banner
+          and/or interstitial formats listed in the table above for each App. AdMob may use
+          your advertising identifier to show ads that are relevant to you and to measure ad
+          performance; you can reset or limit ad personalization from your device's Google
+          Settings at any time. Apps that offer a Pro/paid unlock (for example, to remove
+          ads) process that purchase through <strong>Google Play Billing</strong> — we never
+          see or store your payment card details, which are handled entirely by Google Play.
         </p>
 
         <h4>Data Retention</h4>
         <p>
-          Analytics and diagnostic data is retained by Firebase for up to 14 months from
-          collection, after which it is automatically deleted or anonymized, in line with
-          Firebase's default retention settings. Advertising identifiers are retained by
-          AdMob according to Google's own advertising data policies, not by us directly —
-          we do not maintain a separate database of user data.
+          For Apps that use Firebase (see table above), analytics and diagnostic data is
+          retained by Firebase for up to 14 months from collection, after which it is
+          automatically deleted or anonymized, in line with Firebase's default retention
+          settings. Advertising identifiers are retained by AdMob according to Google's own
+          advertising data policies, not by us directly — we do not maintain a separate
+          database of user data.
         </p>
 
         <h4>Children's Privacy</h4>
